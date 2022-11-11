@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./Card.css"
 class Card extends React.Component {
   constructor(props) {
     super(props);
@@ -13,12 +13,12 @@ class Card extends React.Component {
   render() {
     if(this.state.isFlipped === false) {
       return (
-        <div style={{height:'100px', width:'75px', backgroundColor:'black', borderStyle:'solid', borderColor:'red'}}
+        <div className="back" 
              onClick={this.handleClick}></div>
       );
 		}
     return (
-      <div style={{height:'100px', width:'75px', backgroundColor:'lightblue', borderStyle:'solid', borderColor:'red'}}
+      <div className="front"
            onClick={this.handleClick}>{this.props.cardText}</div>
     );
   }
