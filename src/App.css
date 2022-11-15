@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .card-grid {
@@ -8,3 +9,4 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 25px;
 }
+
