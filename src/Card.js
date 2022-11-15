@@ -8,19 +8,18 @@ class Card extends React.Component {
 
   handleClick = () => {
     this.setState(state => ({isFlipped: !state.isFlipped}));
-    this.props.handleChoice(this.props.card)
+    this.props.handleChoice(this.props.cardText)
   }
   
   render() {
     if(this.state.isFlipped === false) {
       return (
         <div className="back" 
-             onClick={this.handleClick} key = {this.props.key}></div>
+             onClick={this.handleClick} >{this.props.cardText.item}</div>
       );
 		}
     return (
-      <div className="front"
-           onClick={this.handleClick}>{this.props.cardText.item}</div>
+      <div className="front" onClick={this.handleClick}>{this.props.cardText.item}</div>
     );
   }
 }
