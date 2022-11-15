@@ -3,24 +3,37 @@ import Card from './Card'
 import { useState } from 'react'
 
 const cardValues = [
-    "Hello", "Goodbye", "Maybe",
-     "Hey", "What", "Why", "How"
+    {"item":"Hello"},
+    {"item":"Goodbye"},
+    {"item":"Maybe"},
+    {"item":"Hey"},
+    {"item":"What"}, 
+    {"item":"Why"},
+    {"item":"How"}
 ]
 
 function App(){
     const [cards, setCards] = useState([])
-    const [turns, setTurns] = useState([])
+    const [turns, setTurns] = useState(0)
+    const [choiceOne, setChoiceOne] = useState(null)
+    const [choiceTwo, setChoiceTwo] = useState(null)
     //shuffle cards
     const shuffleCards =() =>{
         //const shuffleCards = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5).map((card) => ({ ...card, id:Math.random()}))
-        const shuffleCards = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5)
+        const shuffleCards = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5).map((card) =>({...card, id:Math.random()}) )
 
         setCards(shuffleCards)
         setTurns(0)
+
     }
-   
-    console.log(cards, turns)
-/*<div className="card-grid">
+    console.log(cards)
+    // handle a choice
+
+    const handleChoice = (card) =>{
+       choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+    }
+
+    /*<div className="card-grid">
             {cardValues.map((item,idx)=>(<Card key={idx} cardText={item}/>))}
             </div>
             {cards.map(card => (<Card key={card.id} card={card}/>))}*/ 
@@ -28,7 +41,7 @@ function App(){
         <div className="App">
             <button onClick={shuffleCards}>New Game</button>
         <div className="card-grid">
-            {cards.map((item,idx)=>(<Card key={idx} cardText={item}/>))}
+            {cards.map((card)=>(<Card key={card.id} cardText={card} handleChoice={handleChoice}/>))}
         </div>
             
         </div>
