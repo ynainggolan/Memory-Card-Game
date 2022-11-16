@@ -1,15 +1,15 @@
 import './App.css';
 import Card from './Card'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const cardValues = [
-    {"item":"Hello"},
-    {"item":"Goodbye"},
-    {"item":"Maybe"},
-    {"item":"Hey"},
-    {"item":"What"}, 
-    {"item":"Why"},
-    {"item":"How"}
+    {"item":"Hello", matched: false},
+    {"item":"Goodbye", matched: false},
+    {"item":"Maybe", matched: false},
+    {"item":"Hey", matched: false},
+    {"item":"What", matched: false}, 
+    {"item":"Why", matched: false},
+    {"item":"How", matched: false}
 ]
 
 function App(){
@@ -19,18 +19,47 @@ function App(){
     const [choiceTwo, setChoiceTwo] = useState(null)
     //shuffle cards
     const shuffleCards =() =>{
-        //const shuffleCards = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5).map((card) => ({ ...card, id:Math.random()}))
         const shuffleCards = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5).map((card) =>({...card, id:Math.random()}) )
 
         setCards(shuffleCards)
         setTurns(0)
 
     }
-    console.log(cards)
-    // handle a choice
 
+    // handle a choice
     const handleChoice = (card) =>{
        choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+       //console.log(card)
+    }
+
+    //compares 2 selected card
+    useEffect(() => {
+        if (choiceOne && choiceTwo){
+            
+            if(choiceOne.item === choiceTwo.item){
+                //console.log('Those Card does match')
+                setCards(prevCards => {
+                    return prevCards.map(card => {
+                        if (card.item === choiceOne.item) {
+                            return {...card, matched: true}
+                        } else {
+                            return card
+                        }
+                    })
+                })
+                resetTurn()
+            }else{
+                setTimeout(() => resetTurn(), 1000)
+            }
+        }
+    }, [choiceOne, choiceTwo])
+
+    console.log(cards)
+    // reset choices & increase turn
+    const resetTurn = () => {
+        setChoiceOne(null)
+        setChoiceTwo(null)
+        setTurns(prevTurns => prevTurns + 1)
     }
 
     /*<div className="card-grid">
@@ -40,9 +69,14 @@ function App(){
     return(
         <div className="App">
             <button onClick={shuffleCards}>New Game</button>
-        <div className="card-grid">
-            {cards.map((card)=>(<Card key={card.id} cardText={card} handleChoice={handleChoice}/>))}
-        </div>
+            <div className="card-grid">
+                {cards.map((card)=>(
+                <Card key={card.id} 
+                cardText={card} 
+                handleChoice={handleChoice}
+                flipped={card === choiceOne || card === choiceTwo || card.matched}
+                />))}
+            </div>
             
         </div>
     );
