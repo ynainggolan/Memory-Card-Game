@@ -17,6 +17,7 @@ function App(){
     const [turns, setTurns] = useState(0)
     const [choiceOne, setChoiceOne] = useState(null)
     const [choiceTwo, setChoiceTwo] = useState(null)
+    const [disabled, setDisabled] = useState(false)
     //shuffle cards
     const shuffleCards =() =>{
         const shuffleCards = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5).map((card) =>({...card, id:Math.random()}) )
@@ -35,7 +36,7 @@ function App(){
     //compares 2 selected card
     useEffect(() => {
         if (choiceOne && choiceTwo){
-            
+            setDisabled(true)
             if(choiceOne.item === choiceTwo.item){
                 //console.log('Those Card does match')
                 setCards(prevCards => {
@@ -60,6 +61,7 @@ function App(){
         setChoiceOne(null)
         setChoiceTwo(null)
         setTurns(prevTurns => prevTurns + 1)
+        setDisabled(false)
     }
 
     /*<div className="card-grid">
@@ -75,6 +77,7 @@ function App(){
                 cardText={card} 
                 handleChoice={handleChoice}
                 flipped={card === choiceOne || card === choiceTwo || card.matched}
+                disabled={disabled}
                 />))}
             </div>
             
