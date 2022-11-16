@@ -49,7 +49,7 @@ function App(){
                 })
                 resetTurn()
             }else{
-                resetTurn()
+                setTimeout(() => resetTurn(), 1000)
             }
         }
     }, [choiceOne, choiceTwo])
@@ -70,7 +70,12 @@ function App(){
         <div className="App">
             <button onClick={shuffleCards}>New Game</button>
             <div className="card-grid">
-                {cards.map((card)=>(<Card key={card.id} cardText={card} handleChoice={handleChoice}/>))}
+                {cards.map((card)=>(
+                <Card key={card.id} 
+                cardText={card} 
+                handleChoice={handleChoice}
+                flipped={card === choiceOne || card === choiceTwo || card.matched}
+                />))}
             </div>
             
         </div>
