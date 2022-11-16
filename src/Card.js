@@ -27,7 +27,6 @@ class Card extends React.Component {
             {this.props.cardText.item}              
             </div>
     );
-    this.theSame()
     
 
   }

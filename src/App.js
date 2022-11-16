@@ -35,9 +35,8 @@ function App(){
 
     //compares 2 selected card
     useEffect(() => {
-        setDisabled(true)
         if (choiceOne && choiceTwo){
-            
+            setDisabled(true)
             if(choiceOne.item === choiceTwo.item){
                 //console.log('Those Card does match')
                 setCards(prevCards => {
