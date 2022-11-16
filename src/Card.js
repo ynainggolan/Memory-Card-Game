@@ -7,16 +7,12 @@ class Card extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(state => ({isFlipped: !state.isFlipped}));
-    //this.props.flipped ? this.setState(state => ({isFlipped : !state.isFlipped})) : this.setState(state => ({isFlipped : state.isFlipped}))
-    this.props.handleChoice(this.props.cardText)
-  }
-
-  theSame = () => {
-    if(!this.props.flipped){
+    if(!this.props.disabled){
       this.setState(state => ({isFlipped: !state.isFlipped}));
+      this.props.handleChoice(this.props.cardText)
     }
   }
+
 
   render() {
     if(!this.props.flipped) {
