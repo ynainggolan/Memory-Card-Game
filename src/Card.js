@@ -16,6 +16,7 @@ class Card extends React.Component {
 
   render() {
     if(!this.props.flipped) {
+      //It's a Feature not a bug. (handy during testing and playing)
         return (
           <div className= "back"
                onClick={this.handleClick} >
@@ -26,8 +27,7 @@ class Card extends React.Component {
       <div className= "front">
             {this.props.cardText.item}              
             </div>
-    );
-    
+    );  
 
   }
 }
