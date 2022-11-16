@@ -16,12 +16,12 @@ class Card extends React.Component {
 
   render() {
     if(!this.props.flipped) {
-      return (
-        <div className= "back"
-             onClick={this.handleClick} >
-              {this.props.cardText.item}              
-              </div>
-      );
+        return (
+          <div className= "back"
+               onClick={this.handleClick} >
+                {this.props.cardText.item}              
+                </div>
+       );
 		}return (
       <div className= "front">
             {this.props.cardText.item}              
